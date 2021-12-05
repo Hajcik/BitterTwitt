@@ -78,12 +78,21 @@ WSGI_APPLICATION = 'BitterTwitt.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
+# 'default': {
+#        'ENGINE': 'djongo',
+#        'NAME': 'bittertwitt_db',
+#        'HOST': '127.0.0.1',
+#        'PORT': 27017,
+#    },
+
 DATABASES = {
     'default': {
         'ENGINE': 'djongo',
-        'NAME': 'bittertwitt_db',
-        'HOST': '127.0.0.1',
-        'PORT': 27017,
+        'NAME': 'BitterTwitt_Db',
+        'ENFORCE_SCHEMA': False,
+        'CLIENT': {
+            'host': 'mongodb+srv://Hajcik:hajcik@cluster0.ilqki.mongodb.net/BitterTwitt_Db?retryWrites=true&w=majority'
+        }
     }
 }
 
