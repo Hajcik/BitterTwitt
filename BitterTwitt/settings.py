@@ -38,7 +38,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'RestAPI.apps.RestAPIConfig',
-    'corsheaders'
+    'corsheaders',
+    'bootstrap5'
 ]
 
 MIDDLEWARE = [

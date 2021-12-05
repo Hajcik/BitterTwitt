@@ -12,6 +12,9 @@ def user_list_view(request):
     context ={"users":User.objects.all()}
     return render(request,"users_view.html",context)
 
+def index(request):
+    return render(request,"index.html")
+
 @api_view(['GET', 'POST', 'DELETE'])
 def user_list(request):
     if request.method == 'GET':
