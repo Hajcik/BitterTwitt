@@ -1,12 +1,16 @@
 from django.shortcuts import render
 
-from django.http.response import JsonResponse
+from django.http.response import HttpResponse, JsonResponse
 from rest_framework.parsers import JSONParser 
 from rest_framework import status
  
 from RestAPI.models import User
 from RestAPI.serializers import UserSerializer
 from rest_framework.decorators import api_view
+
+def user_list_view(request):
+    users = [user.first_name + " " + user.last_name for user in User.objects.all()]
+    return HttpResponse("</br>".join(users))
 
 @api_view(['GET', 'POST', 'DELETE'])
 def user_list(request):
@@ -15,7 +19,6 @@ def user_list(request):
         
         users_serializer = UserSerializer(users, many=True)
         return JsonResponse(users_serializer.data, safe=False)
-        # 'safe=False' for objects serialization
  
     elif request.method == 'POST':
         user_data = JSONParser().parse(request)

@@ -1,7 +1,8 @@
-from django.conf.urls import url,include
+from django.urls import path
 from RestAPI import views 
  
 urlpatterns = [ 
-    url(r'^api/users$', views.user_list),
-    url(r'^api/users/(?P<pk>[0-9]+)$', views.user_detail)
+    path('users_view',views.user_list_view),
+    path('users',views.user_list),
+    path('users/:id',views.user_list),
 ]
