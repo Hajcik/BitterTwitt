@@ -15,6 +15,9 @@ def user_list_view(request):
 def index(request):
     return render(request,"index.html")
 
+def user_registration(request):
+    return render(request,"user_registration.html")
+
 @api_view(['GET', 'POST', 'DELETE'])
 def user_list(request):
     if request.method == 'GET':
