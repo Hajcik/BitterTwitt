@@ -1,49 +1,42 @@
-<<<<<<< HEAD
-{% load bootstrap5 %}
-<link rel="stylesheet" href="https://bootswatch.com/5/cyborg/bootstrap.min.css" />
-{# Display a form #}
-
-<form action="#" method="post" class="form">
-  {% csrf_token %} {% bootstrap_form form %} {% buttons %}
-  <button type="submit" class="btn btn-primary">Submit</button>
-  {% endbuttons %}
-</form>
-=======
 <html lang="en">
   <head>
-    <meta charset="utf-8">
+    <meta charset="utf-8" />
     <title>BitterTwitt</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://bootswatch.com/5/vapor/bootstrap.min.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="https://bootswatch.com/5/vapor/bootstrap.min.css" />
     <!-- Global Site Tag (gtag.js) - Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-23019901-1"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
+      function gtag() {
+        dataLayer.push(arguments);
+      }
       gtag('js', new Date());
 
       gtag('config', 'UA-23019901-1');
     </script>
     <style>
-        .navbar-brand{
-            float:left;
-            text-align:center;
-            width:100%;
-            font-size:55px;
-        }
+      .navbar-brand {
+        float: left;
+        text-align: center;
+        width: 100%;
+        font-size: 55px;
+      }
     </style>
   </head>
   <body>
-    <div class="bs-component">
-        <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-          <div class="container-fluid">
-            <a class="navbar-brand" href="#">BitterTwitt</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
-              <span class="navbar-toggler-icon"></span>
-            </button>
-          </div>
-        </nav>
+    {% include 'navbar.html' %}
+    <main style="min-height: 80vh">
+      {% block content %}
+      <div class="col-lg-8 offset-lg-3">
+        <p class="text-justify" style="font-size: 8rem">Bitter Twitt</p>
       </div>
+      {% endblock %}
+    </main>
+    <footer class="border-top footer text-muted">
+      <div class="container text-light">
+        &copy; Daniel Niekurzak Paweł Nita Mariusz Jędrzejewski - 2022 - Bitter Twitt
+      </div>
+    </footer>
   </body>
 </html>
->>>>>>> 87885bfa8dc8a95671868b873537a78b1e5ce3de

@@ -1,20 +1,33 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://bootswatch.com/5/cyborg/bootstrap.min.css">
-    <title>Users View</title>
-</head>
-<body>
-    <h2>Lista użytkowników</h2>
-    <ul>
-        {% for user in users %}
-        <li>
-            {{user.first_name}} {{user.last_name}}
-        </li>
-        {% endfor %}
-    </ul>
-</body>
-</html>
+{% extends 'index.html' %} {% block content %}
+<br />
+
+<div class="row">
+  <div class="col-12 text-center">
+    <h1>Lista użytkowników</h1>
+  </div>
+</div>
+<br />
+<div class="row col-8 offset-2">
+  <table class="table table-dark">
+    <thead class="thead-dark">
+      <tr>
+        <th>Imie</th>
+        <th>Nazwisko</th>
+        <th>Nick</th>
+        <th>E-mail</th>
+        <th></th>
+      </tr>
+    </thead>
+    {% for user in users %}
+    <tr>
+      <td>{{user.first_name}}</td>
+      <td>{{user.last_name}}</td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+    {% endfor %}
+  </table>
+</div>
+
+{% endblock %}
