@@ -1,12 +1,14 @@
 from django.shortcuts import render
 
-from django.http.response import JsonResponse
+from django.http.response import HttpResponse,HttpResponseRedirect, JsonResponse
 from rest_framework.parsers import JSONParser 
 from rest_framework import status
- 
+from django.urls import reverse
+
 from RestAPI.models import User
 from RestAPI.serializers import UserSerializer
 from rest_framework.decorators import api_view
+from .forms import UserForm
 
 def user_list_view(request):
     context ={"users":User.objects.all()}
@@ -16,7 +18,15 @@ def index(request):
     return render(request,"index.html")
 
 def user_registration(request):
-    return render(request,"user_registration.html")
+    print(request)
+    if request.method == 'POST':
+        form = UserForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect(reverse('users'))
+    else:
+        form = UserForm()
+        return render(request,"user_registration.html",{'form':form})
 
 @api_view(['GET', 'POST', 'DELETE'])
 def user_list(request):
