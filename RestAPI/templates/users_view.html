@@ -23,9 +23,9 @@
     <tr href>
       <td>{{user.first_name}}</td>
       <td>{{user.last_name}}</td>
-      <td>{{user.nick}}</td>
+      <td>{{user.username}}</td>
       <td>{{user.email}}</td>
-      <td><a href="user/{{ user|private:'_id' }}">Idż</a></td>
+      <td><a href="user/{{ user.id }}">Idż</a></td>
       <td></td>
     </tr>
     {% endfor %}

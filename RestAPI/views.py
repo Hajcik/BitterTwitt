@@ -3,8 +3,10 @@ from django.shortcuts import render
 from django.http.response import HttpResponseRedirect
 from django.urls import reverse
 
-from RestAPI.models import User
 from .forms import UserForm
+
+from django.contrib.auth.models import User
+from django.contrib.auth import authenticate , login
 
 from pymongo import MongoClient
 
@@ -29,8 +31,5 @@ def user_registration(request):
         return render(request,"user_registration.html",{'form':form})
 
 def user_details(request,user_id):
-    user = db.RestAPI_user.find({"_id" : user_id})
-    return render(request,"user_details.html",{"user":user.collection.find_one()})
-
-def login(request):
-    return render(request,"login.html")
+    user = db.auth_user.find_one({"id" : user_id})
+    return render(request,"user_details.html",{"user":user})

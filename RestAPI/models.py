@@ -1,14 +1,6 @@
 from django.db import models
-
+from django.contrib.auth.models import User
 # Create your models here.
-
-class User(models.Model):
-    _id = models.AutoField(primary_key=True)
-    first_name = models.CharField(max_length=255,blank=False, default='')
-    last_name = models.CharField(max_length=255,blank=False, default='')
-    email = models.CharField(max_length=255, blank=False, default='')
-    nick = models.CharField(max_length=255, blank=False, default='')
-    password = models.CharField(max_length=255, blank=False, default='')
 
 class Twitt(models.Model):
     _id = models.AutoField(primary_key=True)

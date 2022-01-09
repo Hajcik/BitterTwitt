@@ -1,14 +1,6 @@
 from rest_framework import serializers 
-from RestAPI.models import Twitt, User
-  
-class UserSerializer(serializers.ModelSerializer):
- 
-    class Meta:
-        model = User
-        fields = ('id',
-                  'first_name',
-                  'last_name')
-               
+from RestAPI.models import Twitt
+                 
 class TwittSerializer(serializers.ModelSerializer):
  
     class Meta:
