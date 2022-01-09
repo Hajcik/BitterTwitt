@@ -1,0 +1,72 @@
+{% extends 'index.html' %} {% block content %}
+
+<div class="container d-flex justify-content-center align-items-center">
+  <div class="card py-4">
+    <div class="d-flex ml-auto p-2 outline">
+      <img
+        src="https://thumbs.dreamstime.com/b/du%C5%BCy-znak-zapytania-32590456.jpg"
+        class="rounded"
+        width="100"
+      />
+    </div>
+    <h5 class="font-weight-normal">Sekcja komentarzy</h5>
+    <span class="notify-text">Postuj swoje przemyślenia na dowolny temat</span>
+    <div class="mt-3">
+      <span class="accounts">Strona użytkownika {{user.nick}}</span>
+
+      <div class="mt-3">
+        <div class="row">
+          <div class="col-md-6">
+            <div class="inputbox mt-3">
+              <span>{{user.first_name}}</span>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="inputbox mt-3">
+              <span>{{user.last_name}}</span>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12">
+            <div class="inputbox mt-3">
+              <span>{{user.email}}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<br />
+<br />
+<div class="modal-body justify-content-center" id="myModalContent">
+  <div class="col-md-12">
+    <div class="form-group row">
+      <div class="col-md-12">
+        <div class="form-group">
+          <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+        </div>
+      </div>
+      <div class="col-12 mt-3">
+        <input type="submit" class="btn btn-info form-control mb-2" value="Add new comment" />
+      </div>
+    </div>
+  </div>
+</div>
+<br />
+<br />
+<div class="col-md-12">
+  <ul>
+    <li class="card text-center mb-3">
+      <div class="card-header row">
+        <p class="text-left col-6">{{user.nick}}</p>
+        <p class="text-right col-6">data dodania</p>
+      </div>
+      <div class="card-body text-left">
+        <p class="card-text">tresc</p>
+      </div>
+    </li>
+  </ul>
+</div>
+{% endblock %}
