@@ -31,3 +31,6 @@ def user_registration(request):
 def user_details(request,user_id):
     user = db.RestAPI_user.find({"_id" : user_id})
     return render(request,"user_details.html",{"user":user.collection.find_one()})
+
+def login(request):
+    return render(request,"login.html")
