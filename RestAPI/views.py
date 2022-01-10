@@ -7,11 +7,13 @@ from .forms import LoginForm, UserForm
 
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate , login, logout
+from django.contrib.auth.decorators import login_required
 
 from pymongo import MongoClient
 
 db = MongoClient().bittertwitt_db
 
+@login_required(login_url="user/login")
 def user_list_view(request):
     context ={"users":User.objects.all()}
     
@@ -30,6 +32,7 @@ def user_registration(request):
         form = UserForm()
         return render(request,"user_registration.html",{'form':form})
 
+@login_required(login_url="user/login")
 def user_details(request,user_id):
     user = db.auth_user.find_one({"id" : user_id})
     return render(request,"user_details.html",{"user":user})
@@ -52,6 +55,6 @@ def login_view (request) :
         return render(request,"login.html",{'form':form})
 
 
-
+@login_required(login_url="user/login")
 def logout_view (request) :
-    logout( request )
+    logout(request)
