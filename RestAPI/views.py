@@ -13,7 +13,7 @@ from pymongo import MongoClient
 
 db = MongoClient().bittertwitt_db
 
-@login_required(login_url="user/login")
+@login_required(login_url="login")
 def user_list_view(request):
     context ={"users":User.objects.all()}
     
@@ -32,7 +32,7 @@ def user_registration(request):
         form = UserForm()
         return render(request,"user_registration.html",{'form':form})
 
-@login_required(login_url="user/login")
+@login_required(login_url="login")
 def user_details(request,user_id):
     user = db.auth_user.find_one({"id" : user_id})
     return render(request,"user_details.html",{"user":user})
@@ -47,14 +47,18 @@ def login_view (request) :
                 login(request,user)
                 return HttpResponseRedirect(reverse('users'))
             else:
+                form = LoginForm()
                 print("zbanowany uzytkownik")
+                return render(request,"login.html",{'form':form})
         else:
             print("zle passy")
+            form = LoginForm()
+            return render(request,"login.html",{'form':form})
     else:
         form = LoginForm()
         return render(request,"login.html",{'form':form})
 
-
-@login_required(login_url="user/login")
+@login_required(login_url="login")
 def logout_view (request) :
     logout(request)
+    return HttpResponseRedirect('login')
