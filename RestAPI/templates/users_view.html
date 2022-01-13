@@ -1,4 +1,30 @@
 {% extends 'index.html' %} {% block content %} {% load custom_tags %}
+<script>
+  function filterFunction() {
+  var input, filter, table, tr, td, i;
+  input = document.getElementById("search");
+  filter = input.value.toUpperCase();
+  table = document.getElementById("tableUsers");
+  tr = table.getElementsByTagName("tr");
+  for (var i = 1; i < tr.length; i++) {
+    var tds = tr[i].getElementsByTagName("td");
+    var flag = false;
+    for(var j = 0; j < tds.length; j++){
+      var td = tds[j];
+      if (td.innerHTML.toUpperCase().indexOf(filter) > -1) {
+        flag = true;
+      } 
+    }
+    if(flag){
+        tr[i].style.display = "";
+    }
+    else {
+        tr[i].style.display = "none";
+    }
+  }
+}
+</script>
+
 <br />
 
 <div class="row">
@@ -8,7 +34,13 @@
 </div>
 <br />
 <div class="row col-8 offset-2">
-  <table class="table table-dark">
+  <div class="input-group mb-3">
+    <div class="input-group-prepend">
+      <span class="input-group-text" id="inputGroup-sizing-default">Filtruj</span>
+    </div>
+    <input type="text" id="search" onkeyup="filterFunction()" class="form-control" aria-label="filter" aria-describedby="inputGroup-sizing-default">
+  </div>
+  <table class="table table-dark" id="tableUsers">
     <thead class="thead-dark">
       <tr>
         <th>Imie</th>
@@ -25,7 +57,7 @@
       <td>{{user.last_name}}</td>
       <td>{{user.username}}</td>
       <td>{{user.email}}</td>
-      <td><a href="user/{{ user.id }}">Idż</a></td>
+      <td><a href="user/{{ user.id }}">Przejdź</a></td>
       <td></td>
     </tr>
     {% endfor %}
