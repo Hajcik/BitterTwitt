@@ -1,0 +1,108 @@
+{% extends 'index.html' %} {% block content %}
+
+<div class="container d-flex justify-content-center align-items-center">
+  <div class="card py-4">
+    <div class="d-flex ml-auto p-2 outline">
+      <img
+        src="https://thumbs.dreamstime.com/b/du%C5%BCy-znak-zapytania-32590456.jpg"
+        class="rounded"
+        width="100"
+      />
+    </div>
+    <h5 class="font-weight-normal">Sekcja komentarzy</h5>
+    <span class="notify-text">Postuj swoje przemyślenia na dowolny temat!</span>
+    <div class="mt-3">
+      <span class="accounts">Strona użytkownika: {{user.username}}</span>
+
+      <div class="mt-3">
+        <div class="row">
+          <div class="col-md-6">
+            <div class="inputbox mt-3">
+              <span>{{user.first_name}}</span>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="inputbox mt-3">
+              <span>{{user.last_name}}</span>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12">
+            <div class="inputbox mt-3">
+              <span>{{user.email}}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<br />
+<br />
+<div class="modal-body justify-content-center" id="myModalContent">
+  <div class="col-md-12">
+    <div class="form-group row">
+      <div class="col-md-12">
+        <div class="form-group">
+          <form class="form" action="{% url 'postTwitt' user.id %}" method='post' >
+            {% csrf_token %}
+            {{form}}
+            <input 
+            type="content"
+            id="content"
+            name="content"
+            required
+            maxlength="280"
+             type="submit" class="btn btn-info form-control mb-2" value="Add new comment" />
+          </form>
+        </div>
+      </div>
+      <div class="col-12 mt-3">
+
+      </div>
+    </div>
+  </div>
+</div>
+<br />
+<br />
+<div class="col-md-12">
+  <ul>
+    <li class="card text-center mb-3">
+      <div class="card-header row">
+        <p id="autorp" class="text-left col-6">Autor</p>
+        <p id="tytulp" class="text-right col-6">Tytuł</p>
+      </div>
+      {% for twitt in twitts %}
+      <div class="card-header row">
+        <p id="autor_data_p" class="text-left col-6">{{twitt.autor}}</p>
+        <p id="tytul_data_p" class="text-right col-6">{{twitt.title}}</p>
+      </div>
+      <div class="card-body text-left">
+        <p id="contentp" class="card-text">{{twitt.content}}</p>
+      </div>
+      {% endfor %}
+    </li>
+  </ul>
+</div>
+<style>
+#contentp {
+  font-size: 18px;
+}
+#autor_data_p {
+  font-size: 25px;
+}
+
+#tytul_data_p {
+  font-size: 25px;
+}
+
+#autorp {
+  font-size: 35px;
+}
+
+#tytulp {
+  font-size: 35px;
+}
+</style>
+{% endblock %}

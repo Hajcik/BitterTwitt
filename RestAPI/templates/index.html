@@ -1,0 +1,42 @@
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>BitterTwitt</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="https://bootswatch.com/5/vapor/bootstrap.min.css" />
+    <!-- Global Site Tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-23019901-1"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag('js', new Date());
+
+      gtag('config', 'UA-23019901-1');
+    </script>
+    <style>
+      .navbar-brand {
+        float: left;
+        text-align: center;
+        width: 100%;
+        font-size: 55px;
+      }
+    </style>
+  </head>
+  <body>
+    {% include 'navbar.html' %}
+    <main style="min-height: 80vh">
+      {% block content %}
+      <div class="col-lg-8 offset-lg-3">
+        <p class="text-justify" style="font-size: 8rem">Bitter Twitt</p>
+      </div>
+      {% endblock %}
+    </main>
+    <footer class="border-top footer text-muted">
+      <div class="container text-light">
+        &copy; Daniel Niekurzak Paweł Nita Mariusz Jędrzejewski - 2022 - Bitter Twitt
+      </div>
+    </footer>
+  </body>
+</html>
