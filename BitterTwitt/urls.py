@@ -17,7 +17,10 @@ from django.contrib import admin
 from django.urls import path
 from django.conf.urls import url, include 
 
+from RestAPI import views 
+
 urlpatterns = [
    path("api/",include("RestAPI.urls")),
    path('admin/', admin.site.urls), 
+   path('',views.index),
 ]

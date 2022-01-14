@@ -3,8 +3,10 @@ from django.shortcuts import render
 from django.http.response import HttpResponseRedirect
 from django.urls import reverse
 
+from RestAPI.models import Twitt
 from .forms import LoginForm, UserForm, TwittForm
 
+from django.shortcuts import get_object_or_404
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate , login, logout
 from django.contrib.auth.decorators import login_required
@@ -16,7 +18,6 @@ db = MongoClient().bittertwitt_db
 @login_required(login_url="login")
 def user_list_view(request):
     context ={"users":User.objects.all()}
-    
     return render(request,"users_view.html",context)
 
 def index(request):
@@ -36,7 +37,6 @@ def user_registration(request):
 def user_details(request,user_id):
     user = db.auth_user.find_one({"id" : user_id})
     twitts = db.twitts.find({"autor": user['username']})
-
     return render(request,"user_details.html",{"user":user, "twitts": twitts})
 
 def login_view (request) :
@@ -64,3 +64,13 @@ def login_view (request) :
 def logout_view (request) :
     logout(request)
     return HttpResponseRedirect('login')
+
+def postTwitt (request, userId):
+    print("Test")
+    if request.method == "POST":
+        form = TwittForm(request.POST)
+        if form.is_valid():
+            autor = get_object_or_404(User,pk=userId)
+            twitt = Twitt(title=form.cleaned_data.get("title"),content=form.cleaned_data.get("content"),autor=autor)
+            twitt.save()
+    return render(request,"user_details.html",{'user_id':userId})

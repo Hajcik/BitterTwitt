@@ -39,7 +39,6 @@ INSTALLED_APPS = [
     'rest_framework',
     'RestAPI.apps.RestAPIConfig',
     'corsheaders',
-    'bootstrap5'
 ]
 
 MIDDLEWARE = [
