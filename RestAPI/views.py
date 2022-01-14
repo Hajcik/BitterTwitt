@@ -3,7 +3,7 @@ from django.shortcuts import render
 from django.http.response import HttpResponseRedirect
 from django.urls import reverse
 
-from .forms import LoginForm, UserForm
+from .forms import LoginForm, UserForm, TwittForm
 
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate , login, logout
@@ -35,7 +35,9 @@ def user_registration(request):
 @login_required(login_url="login")
 def user_details(request,user_id):
     user = db.auth_user.find_one({"id" : user_id})
-    return render(request,"user_details.html",{"user":user})
+    twitts = db.twitts.find({"autor": user['username']})
+
+    return render(request,"user_details.html",{"user":user, "twitts": twitts})
 
 def login_view (request) :
     if request.method == 'POST':
