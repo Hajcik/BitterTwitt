@@ -1,3 +1,4 @@
+import email
 from django.shortcuts import render
 
 from django.http.response import HttpResponseRedirect
@@ -26,8 +27,16 @@ def index(request):
 def user_registration(request):
     if request.method == 'POST':
         form = UserForm(request.POST)
+        formUser = request.POST
         if form.is_valid():
-            form.save()
+            user = User(
+                first_name= formUser['first_name'],
+                last_name = formUser['last_name'],
+                username = formUser['username'],
+                email=formUser['email']
+            )
+            user.set_password(formUser['password'])
+            user.save()
             return HttpResponseRedirect(reverse('users'))
     else:
         form = UserForm()
@@ -44,11 +53,14 @@ def login_view (request) :
         username = request.POST[ "username" ]
         password = request.POST[ "password" ]
         user = authenticate ( username=username , password=password )
+        print(user)
         if user is not None :
             if user.is_active :
+                print("dobre")
                 login(request,user)
                 return HttpResponseRedirect(reverse('users'))
             else:
+                print("zbanowany")
                 form = LoginForm()
                 print("zbanowany uzytkownik")
                 return render(request,"login.html",{'form':form})
@@ -66,11 +78,10 @@ def logout_view (request) :
     return HttpResponseRedirect('login')
 
 def postTwitt (request, userId):
-    print("Test")
     if request.method == "POST":
         form = TwittForm(request.POST)
         if form.is_valid():
-            autor = get_object_or_404(User,pk=userId)
+            autor = request.user
             twitt = Twitt(title=form.cleaned_data.get("title"),content=form.cleaned_data.get("content"),autor=autor)
             twitt.save()
     return render(request,"user_details.html",{'user_id':userId})
