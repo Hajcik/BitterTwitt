@@ -5,5 +5,4 @@ class TwittSerializer(serializers.ModelSerializer):
  
     class Meta:
         model = Twitt
-        fields = ('id',
-                  'content')
+        fields = '__all__'

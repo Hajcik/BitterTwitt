@@ -31,6 +31,26 @@
       <div class="col-lg-8 offset-lg-3">
         <p class="text-justify" style="font-size: 8rem">Bitter Twitt</p>
       </div>
+      <div class="col-md-9 container justify-content-center align-items-center">
+        <ul>
+          <li class="card text-center mb-3">
+            {% for twitt in twitts reversed %}
+            <div class="card-group">
+              <div class="card">
+                <div class="card-body">
+                  <h5 class="card-title">{{twitt.autor}}</h5>
+                  <p class="card-text">{{twitt.content}}</p>
+                </div>
+                <div class="card-footer">
+                  <small class="text-muted">Data dodania: {{twitt.date}}</small>
+                </div>
+              </div>
+            </div>
+            {% endfor %}
+          </li>
+        </ul>
+      </div>
+
       {% endblock %}
     </main>
     <footer class="border-top footer text-muted">

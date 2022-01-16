@@ -40,50 +40,56 @@
 </div>
 <br />
 <br />
+{% if request.user.username == user.username %}
 <div class="modal-body justify-content-center" id="myModalContent">
   <div class="col-md-12">
     <div class="form-group row">
       <div class="col-10 mt-3 offset-1 ">
-          <form class="form" action="{% url 'postTwitt' user.id %}" method='post' >
+          <form class="form" method='post' >
             {% csrf_token %}
             <div class="col-md-12">
               <div class="form-group">
-                <textarea class="form-control" 
-                value="{{content}}"
-                id="exampleFormControlTextarea1" rows="3"></textarea>
+                {% load crispy_forms_tags %}
+                {{ form.content | as_crispy_field }}
+                <div id="non-edit"> {{ form.autor | as_crispy_field }} </div>
+                <div id="non-edit"> {{ form.date | as_crispy_field }} </div>
               </div>
             </div>
             <br>
-            <button type="submit" value="Save" class="btn btn-info form-control">Dodaj komentarz</button>
+            <button type="submit" class="btn btn-info form-control">Dodaj komentarz</button>
 
           </form>
         </div>
       </div>
     </div>
   </div>
+  {% endif %}
 </div>
 <br />
 <br />
-<div class="col-md-12">
+<div class="col-md-9 container justify-content-center align-items-center">
   <ul>
     <li class="card text-center mb-3">
-      <div class="card-header row">
-        <p id="autorp" class="text-left col-6">Autor</p>
-        <p id="tytulp" class="text-right col-6">Tytuł</p>
-      </div>
-      {% for twitt in twitts %}
-      <div class="card-header row">
-        <p id="autor_data_p" class="text-left col-6">{{twitt.autor}}</p>
-        <p id="tytul_data_p" class="text-right col-6">{{twitt.title}}</p>
-      </div>
-      <div class="card-body text-left">
-        <p id="contentp" class="card-text">{{twitt.content}}</p>
+      {% for twitt in twitts reversed %}
+      <div class="card-group">
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title">{{twitt.autor}}</h5>
+            <p class="card-text">{{twitt.content}}</p>
+          </div>
+          <div class="card-footer">
+            <small class="text-muted">Data dodania: {{twitt.date}}</small>
+          </div>
+        </div>
       </div>
       {% endfor %}
     </li>
   </ul>
 </div>
 <style>
+#non-edit {
+  pointer-events: none;
+}
 #contentp {
   font-size: 18px;
 }

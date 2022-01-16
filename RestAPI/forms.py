@@ -16,4 +16,4 @@ class LoginForm(forms.ModelForm):
 class TwittForm(forms.ModelForm):
     class Meta:
         model = Twitt
-        fields = ['title', 'content', 'autor']
+        fields = '__all__'
