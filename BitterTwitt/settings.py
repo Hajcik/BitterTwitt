@@ -87,15 +87,6 @@ WSGI_APPLICATION = 'BitterTwitt.wsgi.application'
 #        'PORT': 27017,
 #    },
 
-
-    # 'default': {
-    #     'ENGINE': 'djongo',
-    #     'NAME': 'BitterTwitt_Db',
-    #     'ENFORCE_SCHEMA': False,
-    #     'CLIENT': {
-    #         'host': 'mongodb+srv://Hajcik:hajcik@cluster0.ilqki.mongodb.net/BitterTwitt_Db?retryWrites=true&w=majority'
-    #     }
-
 DATABASES = {
 'default': {
        'ENGINE': 'djongo',
